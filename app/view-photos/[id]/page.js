@@ -1,6 +1,7 @@
-"use server"
+    "use server"
 
 import {supabase} from "@/lib/supabase";
+    import GeneratePass from "@/components/GeneratePass";
 
 export default async function ViewPhotosPage({params}) {
     // Get Strip Info From Supabase
@@ -30,6 +31,7 @@ export default async function ViewPhotosPage({params}) {
                         src={photo} alt={"pic " + index} key={index} />
                 })}
             </div>
+            <GeneratePass />
         </div>
     </div>
 }
