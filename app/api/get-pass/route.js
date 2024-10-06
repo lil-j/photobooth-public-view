@@ -77,7 +77,7 @@ export async function GET(request) {
 
         // Create the pass using PKPass
         const pass = new PKPass({}, certificates, {
-            description: `✨ Add your photostrip to your digital wallet! 👇`,
+            description: `✨ Add your photostrip to your digital wallet! 👉`,
             passTypeIdentifier: "pass.photobooth", // Adjusted to match your data
             serialNumber: `AAGH44625236dddaffbda${Math.random()}`, // Ensure unique serial number
             organizationName: "boothd",

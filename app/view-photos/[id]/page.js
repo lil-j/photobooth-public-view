@@ -1,7 +1,11 @@
-    "use server"
+"use server"
 
 import {supabase} from "@/lib/supabase";
     import GeneratePass from "@/components/GeneratePass";
+import PhotoDisplay from "@/components/PhotoDisplay";
+import Image from "next/image";
+import AppleWallet from "../../apple_wallet.webp"
+import AddToWallet from "@/components/Wallet";
 
 export default async function ViewPhotosPage({params}) {
     // Get Strip Info From Supabase
@@ -19,19 +23,16 @@ export default async function ViewPhotosPage({params}) {
     }
 
 
-    return <div>
-        <div className="mt-24 mx-auto px-5">
-            <h1 className="mx-auto text-3xl font-semibold">
-                Your photos from {new Date(data.photoshoot_sessions.session_time).toLocaleDateString()}
-            </h1>
-            <div className="flex md:flex-row flex-col gap-4 mt-8 overflow-x-auto">
-                {photoUrls.map((photo, index) => {
-                    return <img
-                        className="aspect-square w-96 object-cover"
-                        src={photo} alt={"pic " + index} key={index} />
-                })}
-            </div>
-            <GeneratePass />
+    return <div className="mb-[60px]">
+        <div className="fixed z-50 tracking-tight flex-col top-0 bg-white/60 backdrop-blur w-full h-[60px] flex items-center justify-center mx-auto text-lg border-black/20 border-b capitalize text-center font-semibold">
+            Your Photostrip from {data.photoshoot_sessions.event_name}
         </div>
+        <div className="mt-[70px] max-w-xs mx-auto px-5">
+            <small
+                className="font-normal text-xs opacity-60">{new Date(data.photoshoot_sessions.session_time).toLocaleDateString()}</small>
+            <h1>3 Photos</h1>
+            <PhotoDisplay photoUrls={photoUrls}/>
+        </div>
+        <AddToWallet id={params.id}/>
     </div>
 }
