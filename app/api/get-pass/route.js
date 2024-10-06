@@ -35,7 +35,7 @@ export async function GET(request) {
             {
                 fieldUUID: "f8198930-814e-11ef-b825-41174ed9dab8",
                 value: `Taken on ${new Date(data.photoshoot_sessions.session_time).toLocaleDateString()}`,
-                label: data.photoshoot_sessions.event_name,
+                label: "Powered by Booth'd",
                 key: "1"
             }
         ],
@@ -77,18 +77,24 @@ export async function GET(request) {
 
         // Create the pass using PKPass
         const pass = new PKPass({}, certificates, {
-            description: `✨ Add your photostrip to your digital wallet! 👉`,
+            description: `Your Booth'd Memories`,
             passTypeIdentifier: "pass.photobooth", // Adjusted to match your data
             serialNumber: `AAGH44625236dddaffbda${Math.random()}`, // Ensure unique serial number
             organizationName: "boothd",
             teamIdentifier: "XFVHH553N7",
+            logoText: "Photostrip from " + data.photoshoot_sessions.event_name,
             foregroundColor: "rgb(0,208,132)",
             labelColor: "rgb(255,255,255)",
             backgroundColor: "rgb(0,0,0)",
         });
 
-        pass.setBarcodes("36478105430");
+        // pass.setBarcodes("36478105430");
         pass.type = "coupon"; // Set the correct pass type
+
+        pass.headerFields.push({
+            key: "header",
+            value: "🖼🖼🖼",
+        })
 
         // Set fields dynamically based on passData
         pass.secondaryFields.push({
